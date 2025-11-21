@@ -34,6 +34,11 @@ export const createColumns = (params: Params): Array<Column> => {
       value: params.campChoice,
     },
     {
+      id: "alternativeWeeks",
+      name: "Alternative weeks",
+      value: params.alternativeWeeks,
+    },
+    {
       id: "childFirstName",
       name: "Name (first)",
       value: params.childFirstName,

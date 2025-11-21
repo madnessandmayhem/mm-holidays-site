@@ -22,6 +22,9 @@ import FieldTitle from "./FieldTitle"
 export type FormState = {
   // section 1
   campChoice: "1" | "2" | "3"
+  week1Backup: boolean
+  week2Backup: boolean
+  week3Backup: boolean
   // section 2
   childFirstName: string
   childLastName: string
@@ -117,7 +120,10 @@ const MUST_BE_TRUE: Array<keyof FormState> = [
 
 const getInitialState = (): FormState => ({
   // section 1
-  campChoice: "1",
+  campChoice: "3",
+  week1Backup: false,
+  week2Backup: false,
+  week3Backup: false,
   // section 2
   childFirstName: "",
   childLastName: "",
@@ -289,6 +295,16 @@ const validateForm = (formState: FormState): FormikErrors<FormState> => {
 const createRequestParams = (values: FormState): Params => {
   return {
     campChoice: values.campChoice,
+    alternativeWeeks: (() => {
+      return [
+        values.week1Backup ? "1" : null,
+        values.week2Backup ? "2" : null,
+        values.week3Backup ? "3" : null,
+      ]
+        .filter((week): week is string => week != null)
+        .filter(week => week != values.campChoice)
+        .join(",")
+    })(),
     childFirstName: values.childFirstName,
     childLastName: values.childLastName,
     childAddressLine1: values.childAddressLine1,
@@ -541,9 +557,35 @@ const BookingForm: FC<Props> = ({ onComplete, initialState }: Props) => {
                   },
                 ]}
               />
-              <p css="font-size: 0.8em">
+              <SmallText>
                 Booking will open for Weeks 1 and 2 in January 2026.
-              </p>
+              </SmallText>
+              <h3>Alternative weeks</h3>
+              <SmallText>
+                If we run out of space on Week {values.campChoice}, would you be
+                willing to switch to another week?
+              </SmallText>
+              {values.campChoice !== "1" && (
+                <FieldCheckbox
+                  label="Week 1"
+                  checked={values.week1Backup}
+                  fieldName="week1Backup"
+                />
+              )}
+              {values.campChoice !== "2" && (
+                <FieldCheckbox
+                  label="Week 2"
+                  fieldName="week2Backup"
+                  checked={values.week2Backup}
+                />
+              )}
+              {values.campChoice !== "3" && (
+                <FieldCheckbox
+                  label="Week 3"
+                  fieldName="week3Backup"
+                  checked={values.week3Backup}
+                />
+              )}
             </section>
             <section>
               <h2>Child&apos;s details</h2>
@@ -1045,3 +1087,7 @@ const Subsection = ({
     </section>
   )
 }
+
+const SmallText = styled.p`
+  font-size: 0.8em;
+`
