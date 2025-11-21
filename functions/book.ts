@@ -162,6 +162,13 @@ export const handleAsync = async (
     return
   }
 
+  if (params.campChoice !== "3") {
+    callback(null, {
+      statusCode: 400,
+      body: "Only Week 3 is currently available",
+    })
+  }
+
   const confirmationEmailAddress =
     params.parentEmail !== ""
       ? params.parentEmail
