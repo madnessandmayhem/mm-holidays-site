@@ -21,7 +21,7 @@ import FieldTitle from "./FieldTitle"
 
 export type FormState = {
   // section 1
-  campChoice: "1" | "2"
+  campChoice: "1" | "2" | "3"
   // section 2
   childFirstName: string
   childLastName: string
@@ -524,17 +524,26 @@ const BookingForm: FC<Props> = ({ onComplete, initialState }: Props) => {
                   {
                     value: "1",
                     label: "Week 1",
-                    subtitle: "Sat 26th July – Sat 2nd August 2025",
-                    disabled: false,
+                    subtitle: "Sat 25th July – Sat 1st August 2025",
+                    disabled: true,
                   },
                   {
                     value: "2",
-                    label: "Week 2 (spaces limited)",
-                    subtitle: "Sat 2nd August – Sat 9th August 2025",
+                    label: "Week 2",
+                    subtitle: "Sat 1st – Sat 8th August 2025",
+                    disabled: true,
+                  },
+                  {
+                    value: "3",
+                    label: "Week 3",
+                    subtitle: "Sat 8th – Sat 15th August 2026",
                     disabled: false,
                   },
                 ]}
               />
+              <p css="font-size: 0.8em">
+                Booking will open for Weeks 1 and 2 in January 2026.
+              </p>
             </section>
             <section>
               <h2>Child&apos;s details</h2>

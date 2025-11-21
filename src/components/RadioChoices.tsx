@@ -7,26 +7,31 @@ import FieldTitle from "./FieldTitle"
 
 const Main = styled.div`
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: column nowrap;
+  align-items: flex-start;
 `
 
 const LabelText = styled.div``
 
 const LabelSubtitle = styled.div`
   font-size: 0.7em;
-  margin-bottom: 0.7em;
 `
 
 const Choice = styled.div`
   display: flex;
-  flex-flow: column nowrap;
+  flex-flow: row nowrap;
   align-items: center;
-  padding: 1em;
+  padding: 0.5em 1em;
+  margin-bottom: 0.5em;
   margin-right: 0.7em;
   border-radius: 0.4em;
   border-color: #ddd;
   border-style: solid;
   border-width: 1px;
+`
+
+const ChoiceText = styled.div`
+  padding-left: 0.5em;
 `
 
 interface Props {
@@ -60,10 +65,6 @@ const RadioChoices: FC<Props> = ({
                   opacity: option.disabled === true ? 0.5 : 1,
                 }}
               >
-                <LabelText>{option.label}</LabelText>
-                {option.subtitle != null && (
-                  <LabelSubtitle>{option.subtitle}</LabelSubtitle>
-                )}
                 <Field
                   type="radio"
                   name={fieldName}
@@ -77,6 +78,12 @@ const RadioChoices: FC<Props> = ({
                   }}
                   disabled={option.disabled}
                 />
+                <ChoiceText>
+                  <LabelText>{option.label}</LabelText>
+                  {option.subtitle != null && (
+                    <LabelSubtitle>{option.subtitle}</LabelSubtitle>
+                  )}
+                </ChoiceText>
               </Choice>
             </label>
           )

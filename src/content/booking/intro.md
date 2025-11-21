@@ -6,12 +6,4 @@ description: Fill out this form to book your place on M+M. We can't wait to see 
 
 Fill out this form to book your place on M+M. You can read our Terms and Conditions [here](/terms-and-conditions).
 
-**⚠️ We are operating a waiting list for Max and Madness on Week 1. Mayhem 1 still has space!**
-
-**⚠️ There are limited spaces available on Week 2. Please contact <week2@madnessandmayhem.org.uk> before applying.**
-
-> **⛺ Reduced cost for Mayhem boys**
->
-> New for 2025! Boys on Mayhem (15-18) will pay a reduced cost of £234 to reflect that they will be camping rather than in dormitories. For more information, see the [Mayhem](/mayhem) page.
-
 <br />
