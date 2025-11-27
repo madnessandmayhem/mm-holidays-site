@@ -50,7 +50,7 @@ const Booking: FC<Props> = ({ data }: Props) => {
     >
       {booked && (
         <>
-          <h2>Thank you for applying to M+M 2025!</h2>
+          <h2>Thank you for applying to M+M 2026!</h2>
           <p>
             We&apos;ve received your application. Please check your inbox for a
             confirmation email and{" "}

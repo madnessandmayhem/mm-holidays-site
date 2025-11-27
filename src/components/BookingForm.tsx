@@ -540,13 +540,13 @@ const BookingForm: FC<Props> = ({ onComplete, initialState }: Props) => {
                   {
                     value: "1",
                     label: "Week 1",
-                    subtitle: "Sat 25th July – Sat 1st August 2025",
+                    subtitle: "Sat 25th July – Sat 1st August 2026",
                     disabled: true,
                   },
                   {
                     value: "2",
                     label: "Week 2",
-                    subtitle: "Sat 1st – Sat 8th August 2025",
+                    subtitle: "Sat 1st – Sat 8th August 2026",
                     disabled: true,
                   },
                   {
@@ -1032,7 +1032,7 @@ const BookingForm: FC<Props> = ({ onComplete, initialState }: Props) => {
               <p>
                 I agree to the Booking Terms &amp; Conditions. I support and
                 approve my son/daughter/ward taking part in this holiday. I
-                agree to pay any outstanding balance by 31st May 2025.
+                agree to pay any outstanding balance by 31st May 2026.
               </p>
               <FieldCheckbox
                 fieldName="parentConfirmation"

@@ -204,7 +204,7 @@ export const handleAsync = async (
       row,
       tabName: "Raw Bookings",
       startColumn: "A",
-      endColumn: "BE",
+      endColumn: "BF",
       startRow: 2,
     })
     await appendRow({
@@ -213,7 +213,7 @@ export const handleAsync = async (
       row,
       tabName: "Bookings",
       startColumn: "B",
-      endColumn: "BF",
+      endColumn: "BG",
       startRow: 2,
     })
   } catch (err) {
@@ -236,7 +236,7 @@ export const handleAsync = async (
         email: confirmationEmailAddress,
       },
       from: { name: "M+M Bookings", email: "bookings@madnessandmayhem.org.uk" },
-      subject: "Thank you for applying for a place at M+M 2025",
+      subject: "Thank you for applying for a place at M+M 2026",
       text: html,
       html,
     }

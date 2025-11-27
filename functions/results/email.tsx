@@ -11,7 +11,7 @@ const CamperEmail: FC<CamperEmailProps> = ({ week }) => {
   return (
     <body>
       <p>
-        We&apos;re delighted you have applied to come to M+M Week 2025 (week{" "}
+        We&apos;re delighted you have applied to come to M+M Week 2026 (week{" "}
         {week}).
       </p>
       <p>
@@ -23,7 +23,7 @@ const CamperEmail: FC<CamperEmailProps> = ({ week }) => {
         payment details in the next couple of months. Once you have the details,
         you will need to pay the deposit of £40 (or the full fee if you prefer)
         within 2 weeks in order to keep your place(s). The full balance is due
-        by 31st May 2025.
+        by 31st May 2026.
       </p>
       <p>
         We will continue to send important information via email, particularly
