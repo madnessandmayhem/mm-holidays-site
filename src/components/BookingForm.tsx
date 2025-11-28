@@ -516,6 +516,7 @@ const BookingForm: FC<Props> = ({ onComplete, initialState }: Props) => {
         )
         const hideParentSection = age !== null && age >= 18
         const displayParentSection = !hideParentSection
+        const price = values.campChoice === "3" ? "299" : "320"
         return (
           <form
             style={{ marginBottom: "1em" }}
@@ -539,26 +540,26 @@ const BookingForm: FC<Props> = ({ onComplete, initialState }: Props) => {
                 options={[
                   {
                     value: "1",
-                    label: "Week 1",
+                    label: "Week 1 (£320)",
                     subtitle: "Sat 25th July – Sat 1st August 2026",
                     disabled: true,
                   },
                   {
                     value: "2",
-                    label: "Week 2",
+                    label: "Week 2 (£320)",
                     subtitle: "Sat 1st – Sat 8th August 2026",
                     disabled: true,
                   },
                   {
                     value: "3",
-                    label: "Week 3",
+                    label: "Week 3 (£299)",
                     subtitle: "Sat 8th – Sat 15th August 2026",
                     disabled: false,
                   },
                 ]}
               />
               <SmallText>
-                Booking will open for Weeks 1 and 2 in January 2026.
+                Booking will open for Weeks 1 and 2 on 2nd January 2026.
               </SmallText>
               <h3>Alternative weeks</h3>
               <SmallText>
@@ -844,7 +845,7 @@ const BookingForm: FC<Props> = ({ onComplete, initialState }: Props) => {
             </section>
             <section>
               <h2>Payment information</h2>
-              {/* <RadioChoices
+              <RadioChoices
                 title="Payment method"
                 options={[
                   { label: "Bank transfer", value: "Bank transfer" },
@@ -857,23 +858,12 @@ const BookingForm: FC<Props> = ({ onComplete, initialState }: Props) => {
               <RadioChoices
                 title="Payment amount"
                 options={[
-                  { label: "Full (£299/£234*)", value: "Full" },
+                  { label: `Full (£${price})`, value: "Full" },
                   { label: "Deposit (£40)", value: "Deposit" },
                 ]}
                 fieldName="paymentAmount"
                 value={values.paymentAmount}
-              /> */}
-              <p>
-                {/* *£234 price is only for <strong>Mayhem (15-18) boys</strong>.
-                See the <Link to="/mayhem">Mayhem</Link> page for more
-                information.
-                <br />
-                <br /> */}
-                We are currently setting up a new bank account. We will be in
-                touch with the account details in the next couple of months.
-                Once we have shared bank details with you, we will require a
-                deposit of £40 within two weeks or your place will be cancelled.
-              </p>
+              />
             </section>
             <section>
               <h2>Sibling discount</h2>

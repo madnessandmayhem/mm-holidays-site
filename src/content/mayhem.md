@@ -4,7 +4,7 @@ title: "Mayhem"
 description: "If you’re 15 to 18 years old, Mayhem is for you. Mayhem is a chance to hang out with friends, meet new people and try a whole range of activities."
 template: CAMP_PROFILE
 ages: 15-18
-price: £299/£234
+price: £320/£299
 sections: []
 hero: ../images/_DSC4103.JPG
 heroAltText: Mayhem campers and leaders at the last night party.
@@ -15,7 +15,7 @@ Mayhem is a chance to hang out with friends, meet new people and try a whole ran
 
 It’s also an opportunity to take some time out and think about life’s big questions. We’ll be exploring the claims of the Bible together and discussing whether Jesus is relevant to life today.
 
-Mayhem books up fast, so invite all your friends and start reserving your spaces. The cost is £299 for girls (in dorms) and £234 for boys (in tents), with [bursaries/extra funding](/bursary) available if required.
+Mayhem books up fast, so invite all your friends and start reserving your spaces. Madness costs £320 (or £299 for Week 3), with [bursaries/extra funding](/bursary) available if required.
 
 We’re looking forward to seeing you there.
 
