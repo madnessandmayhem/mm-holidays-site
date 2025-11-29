@@ -9,6 +9,14 @@ theme: "light"
 
 # Email
 
+> **✉️ Waiting for a booking confirmation email?**
+> 
+> If you've submitting the M+M booking form but haven't yet received a confirmation email, please:
+> - Wait an hour
+> - Check your spam folder.
+> 
+> If the email still hasn't arrived, email <bookings@madnessandmayhem.org.uk> and we'll be able to help you.
+
 - General queries: <info@madnessandmayhem.org.uk>
 - Madness and Mayhem Trust: <mmtrust@madnessandmayhem.org.uk>
 
