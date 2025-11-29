@@ -21,28 +21,28 @@ const CamperEmail: FC<CamperEmailProps> = ({
         We&apos;re delighted you have applied to come to M+M Week 2026. (week{" "}
         {week}).
       </p>
-      <p>
-        Your application will now be processed and you will receive confirmation
-        of a place (via email) from the Booking Secretary.
-      </p>
       <p>Key details:</p>
       <ul>
         <li>Camper name: {camperFullName}</li>
         <li>Camper DOB: {camperDob}</li>
         <li>Week {week}</li>
-        <li>Price: £{price}</li>
+        <li>Full price: £{price}</li>
       </ul>
       <p>
-        We are currently setting up a new bank account and will send you the
-        payment details in the next couple of months. Once you have the details,
-        you will need to pay the deposit of £40 (or the full fee if you prefer)
-        within 2 weeks in order to keep your place(s). The full balance is due
+        Your application will now be processed and you will receive confirmation
+        of a place (via email) from the Booking Secretary.
+      </p>
+      <p>
+        Upon receipt of confirmation of a place, you will need to pay the
+        deposit of £40 (or the full fee) within 2 weeks in order to keep the
+        place. The email will give you the bank details. The full balance is due
         by 31st May 2026.
       </p>
       <p>
-        We will continue to send important information via email, particularly
-        near the holiday.
+        We will continue to send important information via email. Therefore,
+        please regularly check your emails including your spam folder.
       </p>
+      <p>We look forward to welcoming your child to M+M.</p>
     </body>
   )
 }
