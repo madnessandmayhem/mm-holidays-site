@@ -79,6 +79,7 @@ const Camp: FC<Props> = ({ data }: Props) => {
           shadows={false}
           campName={meta.title}
           price={meta.price}
+          shouldShowWeek3={true}
         />
       </BodyCampDates>
       <RemarkText innerHTML={data.markdownRemark.html} />
