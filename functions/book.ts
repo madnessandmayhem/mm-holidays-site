@@ -109,8 +109,8 @@ export const handleLogic = async (
 ): Promise<HandlerResponse> => {
   const emailClient = new EmailClient({
     region: "eu-west-2",
-    awsAccessKey: getEnv("AWS_ACCESS_KEY"),
-    awsSecretAccessKey: getEnv("AWS_SECRET_ACCESS_KEY"),
+    awsAccessKey: getEnv("MM_AWS_ACCESS_KEY"),
+    awsSecretAccessKey: getEnv("MM_AWS_SECRET_ACCESS_KEY"),
   })
 
   const CONFIRMATION_EMAIL_RECIPIENT = getEnv("CONFIRMATION_EMAIL_RECIPIENT")
