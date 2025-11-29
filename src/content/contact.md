@@ -9,7 +9,7 @@ theme: "light"
 
 # Email
 
-> **✉️ Waiting for a booking confirmation email?**
+> ### ✉️ Waiting for a booking confirmation email?
 > 
 > If you've submitting the M+M booking form but haven't yet received a confirmation email, please:
 > - Wait an hour
