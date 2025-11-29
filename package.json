@@ -35,7 +35,7 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "gatsby build && netlify-lambda build functions --config webpack.functions.js",
+    "build": "gatsby build",
     "develop": "gatsby develop",
     "format": "prettier --write \"{src,functions}/**/*.{js,ts,tsx}\"",
     "prettier-check": "prettier -l \"{src,functions}/**/*.{js,ts,tsx}\"",
