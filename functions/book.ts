@@ -1,15 +1,11 @@
+import { SESClient, SendEmailCommand } from "@aws-sdk/client-ses"
 import { google } from "googleapis"
 import dotenv from "dotenv"
 import * as Sentry from "@sentry/serverless"
 import { renderCamperEmail } from "./results/email"
 import { createColumns } from "./results/dataColumns"
 import { appendRow } from "./results/sheets"
-import type {
-  Handler,
-  HandlerContext,
-  HandlerEvent,
-  HandlerResponse,
-} from "@netlify/functions"
+import type { Handler, HandlerEvent, HandlerResponse } from "@netlify/functions"
 
 dotenv.config()
 
@@ -111,6 +107,12 @@ export const handler: Handler = async (event, _context) => {
 export const handleLogic = async (
   event: HandlerEvent,
 ): Promise<HandlerResponse> => {
+  const emailClient = new EmailClient({
+    region: "eu-west-2",
+    awsAccessKey: getEnv("AWS_ACCESS_KEY"),
+    awsSecretAccessKey: getEnv("AWS_SECRET_ACCESS_KEY"),
+  })
+
   // const CONFIRMATION_EMAIL_RECIPIENT = getEnv("CONFIRMATION_EMAIL_RECIPIENT")
   const GOOGLE_SPREADSHEET_ID = getEnv("GOOGLE_SPREADSHEET_ID")
   const GOOGLE_CLIENT_EMAIL = getEnv("GOOGLE_CLIENT_EMAIL")
@@ -211,19 +213,13 @@ export const handleLogic = async (
   }
 
   try {
-    console.log("sending camper confirmation email")
+    console.log("sending camper confirmation email!!!")
     const html = renderCamperEmail(params.campChoice)
-    const camperEmail = {
-      to: {
-        name: `${params.parentFirstName} ${params.parentLastName}`,
-        email: confirmationEmailAddress,
-      },
-      from: { name: "M+M Bookings", email: "bookings@madnessandmayhem.org.uk" },
+    await emailClient.sendEmail({
       subject: "Thank you for applying for a place at M+M 2026",
-      text: html,
       html,
-    }
-    throw new Error("got to the send email part")
+      toAddresses: [confirmationEmailAddress],
+    })
   } catch (err) {
     // @ts-ignore
     console.log(err.message)
@@ -269,4 +265,54 @@ const getSheetsClient = async (
   await jwtClient.authorize()
 
   return google.sheets({ version: "v4", auth: jwtClient })
+}
+
+//  to: {
+//         name: `${params.parentFirstName} ${params.parentLastName}`,
+//         email: confirmationEmailAddress,
+//       },
+//       from: { name: "M+M Bookings", email: "bookings@madnessandmayhem.org.uk" },
+//       subject: "Thank you for applying for a place at M+M 2026",
+//       text: html,
+//       html,
+type SendEmailArgs = {
+  toAddresses: Array<string>
+  subject: string
+  html: string
+}
+
+class EmailClient {
+  private _sesClient: SESClient
+  constructor(args: {
+    region: string
+    awsAccessKey: string
+    awsSecretAccessKey: string
+  }) {
+    this._sesClient = new SESClient({
+      region: args.region,
+      credentials: {
+        accessKeyId: args.awsAccessKey,
+        secretAccessKey: args.awsSecretAccessKey,
+      },
+    })
+  }
+
+  async sendEmail(args: SendEmailArgs) {
+    const { toAddresses, subject, html } = args
+    const command = new SendEmailCommand({
+      Destination: {
+        ToAddresses: toAddresses,
+      },
+      Message: {
+        Body: {
+          Text: { Data: html },
+          Html: { Data: html },
+        },
+        Subject: { Data: subject },
+      },
+      Source: "M+M Bookings <bookings@madnessandmayhem.org.uk>",
+    })
+
+    await this._sesClient.send(command)
+  }
 }
