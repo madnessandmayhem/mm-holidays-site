@@ -975,20 +975,21 @@ const BookingForm: FC<Props> = ({ onComplete, initialState }: Props) => {
             <section>
               <h2>Mobile phone declaration</h2>
               <p>
-                Max (9-11s) and Madness (12-14s) are mobile phone free holidays.
-                We are keen to protect the young people attending our holidays
-                from the pressures and distractions that mobile phones can
-                bring, whilst fully embracing all that a week away together
-                offers. Should you need to contact your child in an emergency,
-                you will have a leader&apos;s number that you can call.
-                Similarly, we are able to arrange for your child to call you
-                using a leader&apos;s phone.
+                Max (9-11s) and Madness (12-14s) (and all ages on Week 3) are
+                mobile phone free holidays. We are keen to protect the young
+                people attending our holidays from the pressures and
+                distractions that mobile phones can bring, whilst fully
+                embracing all that a week away together offers. Should you need
+                to contact your child in an emergency, you will have a
+                leader&apos;s number that you can call. Similarly, we are able
+                to arrange for your child to call you using a leader&apos;s
+                phone.
               </p>
               <p>
-                Mayhem (15-18s) may use their phones at designated times, but
-                are expected to switch off and store their phones for the rest
-                of the time. Phones are taken in overnight and returned the
-                following day. Leaders have permission to remove phones if
+                On Weeks 1+2, Mayhem (15-18s) may use their phones at designated
+                times, but are expected to switch off and store their phones for
+                the rest of the time. Phones are taken in overnight and returned
+                the following day. Leaders have permission to remove phones if
                 needed.
               </p>
               <p>
