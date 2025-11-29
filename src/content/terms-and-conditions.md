@@ -5,9 +5,17 @@ description: "Our terms and conditions"
 theme: "light"
 ---
 ## 1. How do I book a place at Max, Madness or Mayhem?
-You can [book online](/booking). Usually we would ask that the completed application be accompanied by a non-returnable deposit. However, as part of becoming a CIO (Charitable Incorporated Organisation) we are currently setting up a new bank account. We will be in touch with the account details in the next couple of months but want you to be able to secure your place by completing the booking form. Applications will be dealt with on a date-received priority basis, and you will receive an email of confirmation regarding your booking once it has been processed.
+You can [book online](/booking). Applications will be dealt with on a date-received priority basis, and you will receive an email of confirmation regarding your booking once it has been processed.
 
-Once we have shared bank details with you, we will require a deposit of £40 within two weeks or your place will be cancelled. The balance of the holiday fees is due by 31st May 2026. You will not receive a reminder of the balance due. If payment is not received by this date, we reserve the right to advise you of cancellation of your booking and the loss of your deposit. If you book within eight weeks of the start of the holiday, full fees are due with the application. Holiday places are limited so please book early. M+M Holidays reserves the right to refuse any application.
+Once your place is confirmed, we will require a deposit of £40 within two weeks or your place will be cancelled. The balance of the holiday fees is due by 31st May 2026.
+
+The bank details are:
+- Madness and Mayhem Trust CIO
+- Sort code: 40-16-15
+- Account number: 64396200
+- Reference: your child's name and the week they are attending (eg, J Webster 3)
+
+You will not receive a reminder of the balance due. If payment is not received by this date, we reserve the right to advise you of cancellation of your booking and the loss of your deposit. If you book within eight weeks of the start of the holiday, full fees are due with the application. Holiday places are limited so please book early. M+M Holidays reserves the right to refuse any application.
 
 ## 2. What is included in the cost of the holiday?
 The price includes full board and accommodation, one Frontier Centre-led activity, equipment and any excursions. The holiday is based at The Frontier Centre, Northamptonshire. Accommodation arrangements are in single sex bedrooms (or tents for Mayhem boys only), generally sleeping between two and eight young people. In an effort to keep the cost of the holiday as affordable as possible, most volunteer team members also donate the same amount as the cost of a place for a camper. 

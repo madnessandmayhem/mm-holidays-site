@@ -8,6 +8,7 @@ price: £320/£299
 sections: []
 hero: ../images/max_boys_2022.jpeg
 heroAltText: Max campers smiling at the camera on a sunny day.
+shouldShowWeek3: true
 ---
 
 If you’re 9 to 11 years old, Max is the holiday for you.

@@ -35,8 +35,18 @@ const CamperEmail: FC<CamperEmailProps> = ({
       <p>
         Upon receipt of confirmation of a place, you will need to pay the
         deposit of £40 (or the full fee) within 2 weeks in order to keep the
-        place. The email will give you the bank details. The full balance is due
-        by 31st May 2026.
+        place. Please make payment to:
+        <br />
+        Madness and Mayhem Trust CIO
+        <br />
+        Sort code: 40-16-15
+        <br />
+        Account number: 64396200
+        <br />
+        Reference: your child&apos;s name and the week they are attending (eg, J
+        Webster 3)
+        <br />
+        The full balance is due by 31st May 2026.
       </p>
       <p>
         We will continue to send important information via email. Therefore,

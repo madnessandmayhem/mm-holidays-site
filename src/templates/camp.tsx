@@ -67,6 +67,7 @@ const Camp: FC<Props> = ({ data }: Props) => {
                 shadows={true}
                 campName={meta.title}
                 price={meta.price}
+                shouldShowWeek3={meta.shouldShowWeek3}
               />
             </PageGutter>
           </HeroCampDates>
@@ -110,6 +111,7 @@ export const pageQuery = graphql`
           }
         }
         heroAltText
+        shouldShowWeek3
       }
     }
   }
