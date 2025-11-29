@@ -5,19 +5,33 @@ import { Column } from "./dataColumns"
 
 interface CamperEmailProps {
   week: "1" | "2" | "3"
+  camperFullName: string
+  camperDob: string
 }
 
-const CamperEmail: FC<CamperEmailProps> = ({ week }) => {
+const CamperEmail: FC<CamperEmailProps> = ({
+  week,
+  camperFullName,
+  camperDob,
+}) => {
+  const price = week === "3" ? 299 : 320
   return (
     <body>
       <p>
-        We&apos;re delighted you have applied to come to M+M Week 2026 (week{" "}
+        We&apos;re delighted you have applied to come to M+M Week 2026. (week{" "}
         {week}).
       </p>
       <p>
         Your application will now be processed and you will receive confirmation
         of a place (via email) from the Booking Secretary.
       </p>
+      <p>Key details:</p>
+      <ul>
+        <li>Camper name: {camperFullName}</li>
+        <li>Camper DOB: {camperDob}</li>
+        <li>Week {week}</li>
+        <li>Price: £{price}</li>
+      </ul>
       <p>
         We are currently setting up a new bank account and will send you the
         payment details in the next couple of months. Once you have the details,
@@ -56,7 +70,8 @@ const CampLeaderEmail: FC<CampLeaderEmailProps> = ({
   )
 }
 
-export const renderCamperEmail = (week: "1" | "2" | "3") =>
-  renderToStaticMarkup(<CamperEmail week={week} />)
+export const renderCamperEmail = (props: CamperEmailProps) =>
+  renderToStaticMarkup(<CamperEmail {...props} />)
+
 export const renderCampLeaderEmail = (columns: Array<Column>) =>
   renderToStaticMarkup(<CampLeaderEmail columns={columns} />)

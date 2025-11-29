@@ -2,7 +2,7 @@ import { SESClient, SendEmailCommand } from "@aws-sdk/client-ses"
 import { google } from "googleapis"
 import dotenv from "dotenv"
 import * as Sentry from "@sentry/serverless"
-import { renderCamperEmail } from "./results/email"
+import { renderCamperEmail, renderCampLeaderEmail } from "./results/email"
 import { createColumns } from "./results/dataColumns"
 import { appendRow } from "./results/sheets"
 import type { Handler, HandlerEvent, HandlerResponse } from "@netlify/functions"
@@ -113,7 +113,7 @@ export const handleLogic = async (
     awsSecretAccessKey: getEnv("AWS_SECRET_ACCESS_KEY"),
   })
 
-  // const CONFIRMATION_EMAIL_RECIPIENT = getEnv("CONFIRMATION_EMAIL_RECIPIENT")
+  const CONFIRMATION_EMAIL_RECIPIENT = getEnv("CONFIRMATION_EMAIL_RECIPIENT")
   const GOOGLE_SPREADSHEET_ID = getEnv("GOOGLE_SPREADSHEET_ID")
   const GOOGLE_CLIENT_EMAIL = getEnv("GOOGLE_CLIENT_EMAIL")
   const GOOGLE_PRIVATE_KEY = JSON.parse(getEnv("GOOGLE_PRIVATE_KEY"))
@@ -211,12 +211,16 @@ export const handleLogic = async (
       body: "Could not store booking. Please contact bookings@madnessandmayhem.org.uk",
     }
   }
-
+  const camperFullName = `${params.childFirstName} ${params.childLastName}`
   try {
     console.log("sending camper confirmation email!!!")
-    const html = renderCamperEmail(params.campChoice)
+    const html = renderCamperEmail({
+      week: params.campChoice,
+      camperFullName,
+      camperDob: `${params.childDobYear}-${params.childDobMonth}-${params.childDobDay}`,
+    })
     await emailClient.sendEmail({
-      subject: "Thank you for applying for a place at M+M 2026",
+      subject: `(${camperFullName}) Thank you for applying for a place at M+M 2026`,
       html,
       toAddresses: [confirmationEmailAddress],
     })
@@ -228,22 +232,19 @@ export const handleLogic = async (
     Sentry.captureException(err)
   }
 
-  // try {
-  //   console.log("sending camp leader notification email")
-  //   const html = renderCampLeaderEmail(columns)
-  //   const leaderEmail = {
-  //     to: CONFIRMATION_EMAIL_RECIPIENT.split(","),
-  //     from: { name: "M+M Bookings", email: "bookings@madnessandmayhem.org.uk" },
-  //     subject: "New submission from booking form",
-  //     text: html,
-  //     html,
-  //   }
-  //   await sendgrid.send(leaderEmail)
-  // } catch (err) {
-  //   console.log(err)
-  //   console.log("failed to send camp leader notification email")
-  //   Sentry.captureException(err)
-  // }
+  try {
+    console.log("sending camp leader notification email")
+    const html = renderCampLeaderEmail(columns)
+    await emailClient.sendEmail({
+      subject: `(${camperFullName}) New submission from booking form`,
+      toAddresses: CONFIRMATION_EMAIL_RECIPIENT.split(","),
+      html,
+    })
+  } catch (err) {
+    console.log(err)
+    console.log("failed to send camp leader notification email")
+    Sentry.captureException(err)
+  }
   console.log("emails sent successfully!")
   return {
     statusCode: 200,
