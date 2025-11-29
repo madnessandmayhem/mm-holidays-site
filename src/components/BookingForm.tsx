@@ -73,7 +73,6 @@ export type FormState = {
   heardFriend: boolean
   heardOther: string
   // section 7
-  paymentMethod: null | "Bank transfer" | "Cheque" | "Cash"
   paymentAmount: null | "Full" | "Deposit"
   // section 8
   dietaryNeeds: string
@@ -172,7 +171,6 @@ const getInitialState = (): FormState => ({
   heardFriend: false,
   heardOther: "",
   // section 7
-  paymentMethod: null, // "Bank transfer",
   paymentAmount: null, // "Full",
   // section 8
   dietaryNeeds: "",
@@ -360,7 +358,6 @@ const createRequestParams = (values: FormState): Params => {
     heardChurch: values.heardChurch,
     heardFriend: values.heardFriend,
     heardOther: values.heardOther,
-    paymentMethod: values.paymentMethod,
     paymentAmount: values.paymentAmount,
     dietaryNeeds: values.dietaryNeeds,
     medicalIssues: values.medicalIssues,
@@ -845,16 +842,6 @@ const BookingForm: FC<Props> = ({ onComplete, initialState }: Props) => {
             </section>
             <section>
               <h2>Payment information</h2>
-              <RadioChoices
-                title="Payment method"
-                options={[
-                  { label: "Bank transfer", value: "Bank transfer" },
-                  { label: "Cheque", value: "Cheque" },
-                  { label: "Cash", value: "Cash" },
-                ]}
-                fieldName="paymentMethod"
-                value={values.paymentMethod}
-              />
               <RadioChoices
                 title="Payment amount"
                 options={[
