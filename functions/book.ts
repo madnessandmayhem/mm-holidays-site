@@ -1,11 +1,15 @@
 import { google } from "googleapis"
-import sendgrid from "@sendgrid/mail"
 import dotenv from "dotenv"
 import * as Sentry from "@sentry/serverless"
 import { renderCamperEmail } from "./results/email"
 import { createColumns } from "./results/dataColumns"
 import { appendRow } from "./results/sheets"
-import { APIGatewayEvent, Context, Callback } from "aws-lambda"
+import type {
+  Handler,
+  HandlerContext,
+  HandlerEvent,
+  HandlerResponse,
+} from "@netlify/functions"
 
 dotenv.config()
 
@@ -86,88 +90,69 @@ export interface Params {
   wantBursary: boolean
 }
 
-export const handler = (
-  event: APIGatewayEvent,
-  context: Context,
-  callback: Callback,
-) => {
+export const handler: Handler = async (event, _context) => {
+  console.log(event)
   try {
     const dsn = getEnv("SENTRY_DSN_BACKEND")
     Sentry.AWSLambda.init({ dsn })
     console.log(new Date().toISOString())
     console.log("handling event", event.body)
-    handleAsync(event, context, callback).catch(err => {
-      console.log("got async error", err)
-      Sentry.captureException(err)
-      callback(null, {
-        statusCode: 500,
-        body: "Error submitting. Please try again.",
-      })
-    })
+    return await handleLogic(event)
   } catch (err) {
-    console.log("got top-level error", err)
+    console.log("got error", err)
     Sentry.captureException(err)
-    callback(null, {
-      statusCode: 500,
+    return {
       body: "Error submitting. Please try again.",
-    })
+      statusCode: 500,
+    }
   }
 }
 
-export const handleAsync = async (
-  event: APIGatewayEvent,
-  // @ts-ignore
-  context: Context,
-  callback: Callback,
-) => {
-  const SENDGRID_API_KEY = getEnv("SENDGRID_API_KEY")
+export const handleLogic = async (
+  event: HandlerEvent,
+): Promise<HandlerResponse> => {
   // const CONFIRMATION_EMAIL_RECIPIENT = getEnv("CONFIRMATION_EMAIL_RECIPIENT")
   const GOOGLE_SPREADSHEET_ID = getEnv("GOOGLE_SPREADSHEET_ID")
   const GOOGLE_CLIENT_EMAIL = getEnv("GOOGLE_CLIENT_EMAIL")
   const GOOGLE_PRIVATE_KEY = JSON.parse(getEnv("GOOGLE_PRIVATE_KEY"))
-  sendgrid.setApiKey(SENDGRID_API_KEY)
   if (event.body === null) {
     throw new Error("Event had empty body")
   }
   const params: Params = JSON.parse(event.body)
 
   if (params.acceptRecordKeeping === false) {
-    callback(null, {
+    return {
       statusCode: 400,
       body: "You must accept record keeping",
-    })
-    return
+    }
   }
 
   if (params.childConfirmation === false) {
-    callback(null, {
+    return {
       statusCode: 400,
       body: "The child confirmation box must be ticked",
-    })
-    return
+    }
   }
 
   if (params.mobileConfirmation === false) {
-    callback(null, {
+    return {
       statusCode: 400,
       body: "The mobile phone declaration box must be ticked",
-    })
-    return
+    }
   }
 
   if (params.parentConfirmation === false) {
-    callback(null, {
+    return {
       statusCode: 400,
       body: "The parent confirmation box must be ticked",
-    })
-    return
+    }
   }
 
   if (params.campChoice !== "3") {
-    callback(null, {
+    return {
       statusCode: 400,
       body: "Only Week 3 is currently available",
-    })
+    }
   }
 
   const confirmationEmailAddress =
@@ -178,8 +163,7 @@ export const handleAsync = async (
       : null
   // tslint:disable-next-line strict-type-predicates
   if (confirmationEmailAddress == null) {
-    callback(null, { statusCode: 400, body: "Please provide an email" })
-    return
+    return { statusCode: 400, body: "Please provide an email" }
   }
 
   const columns = createColumns(params)
@@ -220,11 +204,10 @@ export const handleAsync = async (
     console.log("failed to append row to google sheet")
     console.log(err)
     Sentry.captureException(err)
-    callback(null, {
+    return {
       statusCode: 500,
       body: "Could not store booking. Please contact bookings@madnessandmayhem.org.uk",
-    })
-    return
+    }
   }
 
   try {
@@ -240,10 +223,10 @@ export const handleAsync = async (
       text: html,
       html,
     }
-    await sendgrid.send(camperEmail)
+    throw new Error("got to the send email part")
   } catch (err) {
     // @ts-ignore
-    console.log(err.response.body)
+    console.log(err.message)
     // @ts-ignore
     console.log("failed to send camper confirmation email", err.message)
     Sentry.captureException(err)
@@ -266,10 +249,10 @@ export const handleAsync = async (
   //   Sentry.captureException(err)
   // }
   console.log("emails sent successfully!")
-  callback(null, {
+  return {
     statusCode: 200,
     body: "",
-  })
+  }
 }
 
 const getSheetsClient = async (
