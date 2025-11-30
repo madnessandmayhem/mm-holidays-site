@@ -684,7 +684,7 @@ const BookingForm: FC<Props> = ({ onComplete, initialState }: Props) => {
               <FieldErrorMessage name="childDobYear" />
               {schoolYear != null && inferredCamp != null && (
                 <p>
-                  This means your child is in year <strong>{schoolYear}</strong>{" "}
+                  This means your child is in <strong>year {schoolYear}</strong>{" "}
                   at school and so would be in the{" "}
                   <strong>{inferredCamp}</strong> age group at M+M. Please
                   contact us if that is incorrect.
