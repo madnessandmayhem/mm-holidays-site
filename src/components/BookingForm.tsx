@@ -540,7 +540,16 @@ const BookingForm: FC<Props> = ({ onComplete, initialState }: Props) => {
         submitCount,
         isSubmitting,
       }) => {
-        const inferredCamp = calculateCamp(values)
+        const dob = newDate(
+          values.childDobYear,
+          values.childDobMonth,
+          values.childDobDay,
+        )
+        const schoolYear = dob != null ? getSchoolYear(dob, 2026) : null
+        const inferredCamp =
+          schoolYear != null
+            ? getCampFromSchoolYearAndWeek(values.campChoice, schoolYear)
+            : null
         const age = calculateAge(
           values.childDobYear,
           values.childDobMonth,
@@ -673,11 +682,12 @@ const BookingForm: FC<Props> = ({ onComplete, initialState }: Props) => {
               <FieldErrorMessage name="childDobDay" />
               <FieldErrorMessage name="childDobMonth" />
               <FieldErrorMessage name="childDobYear" />
-              {inferredCamp && (
+              {schoolYear != null && inferredCamp != null && (
                 <p>
-                  Your child&apos;s age group would be{" "}
-                  <strong>{inferredCamp}</strong>. Please contact us if that
-                  sounds incorrect to you.
+                  This means your child is in year <strong>{schoolYear}</strong>{" "}
+                  at school and so would be in the{" "}
+                  <strong>{inferredCamp}</strong> age group at M+M. Please
+                  contact us if that is incorrect.
                 </p>
               )}
               <RadioChoices
