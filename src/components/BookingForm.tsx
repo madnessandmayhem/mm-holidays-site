@@ -442,6 +442,41 @@ const calculateAge = (
   return age
 }
 
+const getSchoolYear = (dob: Date, yearOfCamp: number): number => {
+  let birthYear = dob.getFullYear()
+  if (dob.getMonth() < 8) {
+    birthYear -= 1
+  }
+  // birthYear tells us the academic year they were born in
+  const schoolYear = yearOfCamp - birthYear - 6
+  return schoolYear
+}
+
+const getCampFromSchoolYearAndWeek = (
+  week: "1" | "2" | "3",
+  schoolYear: number,
+): string | null => {
+  if (week === "3") {
+    if (schoolYear >= 4 && schoolYear <= 6) {
+      return "Max"
+    } else if (schoolYear >= 7 && schoolYear <= 11) {
+      return "Madness+"
+    } else {
+      return null
+    }
+  }
+
+  if (schoolYear >= 4 && schoolYear <= 6) {
+    return "Max"
+  } else if (schoolYear >= 7 && schoolYear <= 9) {
+    return "Madness"
+  } else if (schoolYear >= 10 && schoolYear <= 13) {
+    return "Mayhem"
+  } else {
+    return null
+  }
+}
+
 type SubmitState =
   | { type: "ready" }
   | { type: "success" }
@@ -505,6 +540,7 @@ const BookingForm: FC<Props> = ({ onComplete, initialState }: Props) => {
         submitCount,
         isSubmitting,
       }) => {
+        const inferredCamp = calculateCamp(values)
         const age = calculateAge(
           values.childDobYear,
           values.childDobMonth,
@@ -545,7 +581,7 @@ const BookingForm: FC<Props> = ({ onComplete, initialState }: Props) => {
                     value: "2",
                     label: "Week 2 (£320)",
                     subtitle: "Sat 1st – Sat 8th August 2026",
-                    disabled: true,
+                    disabled: false,
                   },
                   {
                     value: "3",
@@ -637,6 +673,13 @@ const BookingForm: FC<Props> = ({ onComplete, initialState }: Props) => {
               <FieldErrorMessage name="childDobDay" />
               <FieldErrorMessage name="childDobMonth" />
               <FieldErrorMessage name="childDobYear" />
+              {inferredCamp && (
+                <p>
+                  Your child&apos;s age group would be{" "}
+                  <strong>{inferredCamp}</strong>. Please contact us if that
+                  sounds incorrect to you.
+                </p>
+              )}
               <RadioChoices
                 title="Sex"
                 fieldName="gender"
@@ -1069,3 +1112,17 @@ const Subsection = ({
 const SmallText = styled.p`
   font-size: 0.8em;
 `
+
+const calculateCamp = (values: FormState): string | null => {
+  const dob = newDate(
+    values.childDobYear,
+    values.childDobMonth,
+    values.childDobDay,
+  )
+  const schoolYear = dob != null ? getSchoolYear(dob, 2026) : null
+  const inferredCamp =
+    schoolYear != null
+      ? getCampFromSchoolYearAndWeek(values.campChoice, schoolYear)
+      : null
+  return inferredCamp
+}
