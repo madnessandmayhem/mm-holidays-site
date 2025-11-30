@@ -2,16 +2,14 @@
 description: Fill out this form to book your place on M+M. We can't wait to see you at camp!
 ---
 
-## Full cost of holiday: £299
 
 Fill out this form to book your place on M+M. You can read our Terms and Conditions [here](/terms-and-conditions).
 
-**⚠️ We are operating a waiting list for Max and Madness on Week 1. Mayhem 1 still has space!**
-
-**⚠️ There are limited spaces available on Week 2. Please contact <week2@madnessandmayhem.org.uk> before applying.**
-
-> **⛺ Reduced cost for Mayhem boys**
->
-> New for 2025! Boys on Mayhem (15-18) will pay a reduced cost of £234 to reflect that they will be camping rather than in dormitories. For more information, see the [Mayhem](/mayhem) page.
+> ### 🎺 Week 3 🎺
+> Brand new for 2026: we are running a third week of M+M!
+> 
+> Week 3 will have exactly the same programme as Week 1+2, but with a special Launch Year Price of £299, and is taking a slightly smaller age range of 9-16.
+> 
+> Full details can be found [here](/week3).
 
 <br />

@@ -4,21 +4,22 @@ title: "Mayhem"
 description: "If you’re 15 to 18 years old, Mayhem is for you. Mayhem is a chance to hang out with friends, meet new people and try a whole range of activities."
 template: CAMP_PROFILE
 ages: 15-18
-price: £299/£234
+price: £320
 sections: []
 hero: ../images/_DSC4103.JPG
 heroAltText: Mayhem campers and leaders at the last night party.
+shouldShowWeek3: false
 ---
-<p></p>
-<blockquote>
-<p><strong>✨ New for 2025!</strong> Mayhem boys will be accommodated in bell tents. An opportunity to enjoy the great outdoors in a cosy tented village.</p>
 
-You'll be in tents of 6 or 4.  The tents are made of a sturdy waterproof canvas with an integral ground sheet. You'll sleep on a camp bed along with a self inflating mattress. Bedding will also be provided.  Showers and toilets are a short walk to the nearby block.
+<br/>
 
-Regrettably, this accommodation is not suitable for those with mobility issues but if that would be you, please do get in touch to discuss possible alternatives.
-
-To reflect that Mayhem boys will be camping, <strong>the cost is reduced from £299 to £234.</strong>
-</blockquote>
+> ### Week 3
+>
+> Mayhem will not be running as usual on Week 3 in 2026. Instead, we'll be extending Madness into Madness+, which will take age 12-16 (school years 7-11).
+> 
+> Weeks 1+2 will continue to run Mayhem as usual, so if you're in year 12-13 you can sign up for those.
+>
+> Full details available [here](/week3).
 
 If you’re 15 to 18 years old, Mayhem is for you.
 
@@ -26,7 +27,7 @@ Mayhem is a chance to hang out with friends, meet new people and try a whole ran
 
 It’s also an opportunity to take some time out and think about life’s big questions. We’ll be exploring the claims of the Bible together and discussing whether Jesus is relevant to life today.
 
-Mayhem books up fast, so invite all your friends and start reserving your spaces. The cost is £299 for girls (in dorms) and £234 for boys (in tents), with [bursaries/extra funding](/bursary) available if required.
+Mayhem books up fast, so invite all your friends and start reserving your spaces. Mayhem costs £320, with [bursaries/extra funding](/bursary) available if required.
 
 We’re looking forward to seeing you there.
 

@@ -21,7 +21,10 @@ import FieldTitle from "./FieldTitle"
 
 export type FormState = {
   // section 1
-  campChoice: "1" | "2"
+  campChoice: "1" | "2" | "3"
+  week1Backup: boolean
+  week2Backup: boolean
+  week3Backup: boolean
   // section 2
   childFirstName: string
   childLastName: string
@@ -70,7 +73,6 @@ export type FormState = {
   heardFriend: boolean
   heardOther: string
   // section 7
-  paymentMethod: null | "Bank transfer" | "Cheque" | "Cash"
   paymentAmount: null | "Full" | "Deposit"
   // section 8
   dietaryNeeds: string
@@ -117,7 +119,10 @@ const MUST_BE_TRUE: Array<keyof FormState> = [
 
 const getInitialState = (): FormState => ({
   // section 1
-  campChoice: "1",
+  campChoice: "3",
+  week1Backup: false,
+  week2Backup: false,
+  week3Backup: false,
   // section 2
   childFirstName: "",
   childLastName: "",
@@ -166,7 +171,6 @@ const getInitialState = (): FormState => ({
   heardFriend: false,
   heardOther: "",
   // section 7
-  paymentMethod: null, // "Bank transfer",
   paymentAmount: null, // "Full",
   // section 8
   dietaryNeeds: "",
@@ -289,6 +293,16 @@ const validateForm = (formState: FormState): FormikErrors<FormState> => {
 const createRequestParams = (values: FormState): Params => {
   return {
     campChoice: values.campChoice,
+    alternativeWeeks: (() => {
+      return [
+        values.week1Backup ? "1" : null,
+        values.week2Backup ? "2" : null,
+        values.week3Backup ? "3" : null,
+      ]
+        .filter((week): week is string => week != null)
+        .filter(week => week != values.campChoice)
+        .join(",")
+    })(),
     childFirstName: values.childFirstName,
     childLastName: values.childLastName,
     childAddressLine1: values.childAddressLine1,
@@ -344,7 +358,6 @@ const createRequestParams = (values: FormState): Params => {
     heardChurch: values.heardChurch,
     heardFriend: values.heardFriend,
     heardOther: values.heardOther,
-    paymentMethod: values.paymentMethod,
     paymentAmount: values.paymentAmount,
     dietaryNeeds: values.dietaryNeeds,
     medicalIssues: values.medicalIssues,
@@ -429,6 +442,41 @@ const calculateAge = (
   return age
 }
 
+const getSchoolYear = (dob: Date, yearOfCamp: number): number => {
+  let birthYear = dob.getFullYear()
+  if (dob.getMonth() < 8) {
+    birthYear -= 1
+  }
+  // birthYear tells us the academic year they were born in
+  const schoolYear = yearOfCamp - birthYear - 6
+  return schoolYear
+}
+
+const getCampFromSchoolYearAndWeek = (
+  week: "1" | "2" | "3",
+  schoolYear: number,
+): string | null => {
+  if (week === "3") {
+    if (schoolYear >= 4 && schoolYear <= 6) {
+      return "Max"
+    } else if (schoolYear >= 7 && schoolYear <= 11) {
+      return "Madness+"
+    } else {
+      return null
+    }
+  }
+
+  if (schoolYear >= 4 && schoolYear <= 6) {
+    return "Max"
+  } else if (schoolYear >= 7 && schoolYear <= 9) {
+    return "Madness"
+  } else if (schoolYear >= 10 && schoolYear <= 13) {
+    return "Mayhem"
+  } else {
+    return null
+  }
+}
+
 type SubmitState =
   | { type: "ready" }
   | { type: "success" }
@@ -492,6 +540,16 @@ const BookingForm: FC<Props> = ({ onComplete, initialState }: Props) => {
         submitCount,
         isSubmitting,
       }) => {
+        const dob = newDate(
+          values.childDobYear,
+          values.childDobMonth,
+          values.childDobDay,
+        )
+        const schoolYear = dob != null ? getSchoolYear(dob, 2026) : null
+        const inferredCamp =
+          schoolYear != null
+            ? getCampFromSchoolYearAndWeek(values.campChoice, schoolYear)
+            : null
         const age = calculateAge(
           values.childDobYear,
           values.childDobMonth,
@@ -500,6 +558,7 @@ const BookingForm: FC<Props> = ({ onComplete, initialState }: Props) => {
         )
         const hideParentSection = age !== null && age >= 18
         const displayParentSection = !hideParentSection
+        const price = values.campChoice === "3" ? "299" : "320"
         return (
           <form
             style={{ marginBottom: "1em" }}
@@ -523,18 +582,53 @@ const BookingForm: FC<Props> = ({ onComplete, initialState }: Props) => {
                 options={[
                   {
                     value: "1",
-                    label: "Week 1",
-                    subtitle: "Sat 26th July – Sat 2nd August 2025",
-                    disabled: false,
+                    label: "Week 1 (£320)",
+                    subtitle: "Sat 25th July – Sat 1st August 2026",
+                    disabled: true,
                   },
                   {
                     value: "2",
-                    label: "Week 2 (spaces limited)",
-                    subtitle: "Sat 2nd August – Sat 9th August 2025",
+                    label: "Week 2 (£320)",
+                    subtitle: "Sat 1st – Sat 8th August 2026",
+                    disabled: true,
+                  },
+                  {
+                    value: "3",
+                    label: "Week 3 (£299)",
+                    subtitle: "Sat 8th – Sat 15th August 2026",
                     disabled: false,
                   },
                 ]}
               />
+              <SmallText>
+                Booking will open for Weeks 1 and 2 on 2nd January 2026.
+              </SmallText>
+              <h3>Alternative weeks</h3>
+              <SmallText>
+                If we run out of space on Week {values.campChoice}, would you be
+                willing to switch to another week?
+              </SmallText>
+              {values.campChoice !== "1" && (
+                <FieldCheckbox
+                  label="Week 1"
+                  checked={values.week1Backup}
+                  fieldName="week1Backup"
+                />
+              )}
+              {values.campChoice !== "2" && (
+                <FieldCheckbox
+                  label="Week 2"
+                  fieldName="week2Backup"
+                  checked={values.week2Backup}
+                />
+              )}
+              {values.campChoice !== "3" && (
+                <FieldCheckbox
+                  label="Week 3"
+                  fieldName="week3Backup"
+                  checked={values.week3Backup}
+                />
+              )}
             </section>
             <section>
               <h2>Child&apos;s details</h2>
@@ -588,6 +682,14 @@ const BookingForm: FC<Props> = ({ onComplete, initialState }: Props) => {
               <FieldErrorMessage name="childDobDay" />
               <FieldErrorMessage name="childDobMonth" />
               <FieldErrorMessage name="childDobYear" />
+              {schoolYear != null && inferredCamp != null && (
+                <p>
+                  This means your child is in <strong>year {schoolYear}</strong>{" "}
+                  at school and so would be in the{" "}
+                  <strong>{inferredCamp}</strong> age group at M+M. Please
+                  contact us if that is incorrect.
+                </p>
+              )}
               <RadioChoices
                 title="Sex"
                 fieldName="gender"
@@ -793,36 +895,15 @@ const BookingForm: FC<Props> = ({ onComplete, initialState }: Props) => {
             </section>
             <section>
               <h2>Payment information</h2>
-              {/* <RadioChoices
-                title="Payment method"
-                options={[
-                  { label: "Bank transfer", value: "Bank transfer" },
-                  { label: "Cheque", value: "Cheque" },
-                  { label: "Cash", value: "Cash" },
-                ]}
-                fieldName="paymentMethod"
-                value={values.paymentMethod}
-              />
               <RadioChoices
                 title="Payment amount"
                 options={[
-                  { label: "Full (£299/£234*)", value: "Full" },
+                  { label: `Full (£${price})`, value: "Full" },
                   { label: "Deposit (£40)", value: "Deposit" },
                 ]}
                 fieldName="paymentAmount"
                 value={values.paymentAmount}
-              /> */}
-              <p>
-                {/* *£234 price is only for <strong>Mayhem (15-18) boys</strong>.
-                See the <Link to="/mayhem">Mayhem</Link> page for more
-                information.
-                <br />
-                <br /> */}
-                We are currently setting up a new bank account. We will be in
-                touch with the account details in the next couple of months.
-                Once we have shared bank details with you, we will require a
-                deposit of £40 within two weeks or your place will be cancelled.
-              </p>
+              />
             </section>
             <section>
               <h2>Sibling discount</h2>
@@ -947,20 +1028,21 @@ const BookingForm: FC<Props> = ({ onComplete, initialState }: Props) => {
             <section>
               <h2>Mobile phone declaration</h2>
               <p>
-                Max (9-11s) and Madness (12-14s) are mobile phone free holidays.
-                We are keen to protect the young people attending our holidays
-                from the pressures and distractions that mobile phones can
-                bring, whilst fully embracing all that a week away together
-                offers. Should you need to contact your child in an emergency,
-                you will have a leader&apos;s number that you can call.
-                Similarly, we are able to arrange for your child to call you
-                using a leader&apos;s phone.
+                Max (9-11s) and Madness (12-14s) (and all ages on Week 3) are
+                mobile phone free holidays. We are keen to protect the young
+                people attending our holidays from the pressures and
+                distractions that mobile phones can bring, whilst fully
+                embracing all that a week away together offers. Should you need
+                to contact your child in an emergency, you will have a
+                leader&apos;s number that you can call. Similarly, we are able
+                to arrange for your child to call you using a leader&apos;s
+                phone.
               </p>
               <p>
-                Mayhem (15-18s) may use their phones at designated times, but
-                are expected to switch off and store their phones for the rest
-                of the time. Phones are taken in overnight and returned the
-                following day. Leaders have permission to remove phones if
+                On Weeks 1+2, Mayhem (15-18s) may use their phones at designated
+                times, but are expected to switch off and store their phones for
+                the rest of the time. Phones are taken in overnight and returned
+                the following day. Leaders have permission to remove phones if
                 needed.
               </p>
               <p>
@@ -981,7 +1063,7 @@ const BookingForm: FC<Props> = ({ onComplete, initialState }: Props) => {
               <p>
                 I agree to the Booking Terms &amp; Conditions. I support and
                 approve my son/daughter/ward taking part in this holiday. I
-                agree to pay any outstanding balance by 31st May 2025.
+                agree to pay any outstanding balance by 31st May 2026.
               </p>
               <FieldCheckbox
                 fieldName="parentConfirmation"
@@ -1036,3 +1118,7 @@ const Subsection = ({
     </section>
   )
 }
+
+const SmallText = styled.p`
+  font-size: 0.8em;
+`

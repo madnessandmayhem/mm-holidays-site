@@ -25,7 +25,7 @@ export const createColumns = (params: Params): Array<Column> => {
   const now = new Date()
   const monthAgeNow = differenceInMonths(now, birthDate)
 
-  const campDate = new Date("2025/07/26")
+  const campDate = new Date("2026/07/26")
   const monthAgeCamp = differenceInMonths(campDate, birthDate)
   return [
     {
@@ -237,11 +237,6 @@ export const createColumns = (params: Params): Array<Column> => {
       value: params.heardOther,
     },
     {
-      id: "paymentMethod",
-      name: "Payment method",
-      value: params.paymentMethod ?? "",
-    },
-    {
       id: "paymentAmount",
       name: "Payment amount",
       value: params.paymentAmount ?? "",
@@ -300,6 +295,11 @@ export const createColumns = (params: Params): Array<Column> => {
       id: "wantBursary",
       name: "Apply for bursary?",
       value: stringifyBoolean(params.wantBursary),
+    },
+    {
+      id: "alternativeWeeks",
+      name: "Alternative weeks",
+      value: params.alternativeWeeks,
     },
     {
       id: "formSubmissionDate",

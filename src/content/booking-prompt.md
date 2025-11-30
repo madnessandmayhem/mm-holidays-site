@@ -1,4 +1,4 @@
 ---
-header: "Save the dates for 2026!"
+header: "Week 3 bookings are now open!"
 ---
-Put the dates for M+M 2026 into your diary and we'll see you there! Bookings will open in the new year.
+You can now book on to [Week 3](/week3)! Bookings for Weeks 1+2 will open on 2nd January 2026.

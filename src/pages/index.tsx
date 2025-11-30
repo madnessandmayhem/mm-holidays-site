@@ -223,6 +223,7 @@ const IndexPage: FC<Props> = ({ data }: Props) => {
               src={`https://www.youtube.com/embed/${VIDEO_ID}?&autoplay=1&rel=0&mute=1&modestbranding=1&loop=1&playlist=${VIDEO_ID}&fs=1`}
               frameBorder="0"
               allow="fullscreen;"
+              referrerPolicy="strict-origin-when-cross-origin"
             />
           </PromoVideoContainer>
         </PageGutter>

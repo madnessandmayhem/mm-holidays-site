@@ -56,9 +56,15 @@ interface Props {
   campName: string
   shadows: boolean
   price: string
+  shouldShowWeek3: boolean
 }
 
-const CampDatesCTA: FC<Props> = ({ campName, shadows, price }: Props) => {
+const CampDatesCTA: FC<Props> = ({
+  campName,
+  shadows,
+  price,
+  shouldShowWeek3,
+}: Props) => {
   const data = useStaticQuery(graphql`
     query CampDatesCTA {
       site {
@@ -74,16 +80,23 @@ const CampDatesCTA: FC<Props> = ({ campName, shadows, price }: Props) => {
   return (
     <HeroDetailsContent>
       <div>
-        {data.site.siteMetadata.campWeeks.map((week: any) => {
-          return (
-            <HeroDetailsRow key={week.week} shadows={shadows}>
-              <CampName>
-                {campName} {week.week}:
-              </CampName>
-              <CampDate>{week.shortDates}</CampDate>
-            </HeroDetailsRow>
-          )
-        })}
+        {data.site.siteMetadata.campWeeks
+          .filter((week: any) => {
+            if (!shouldShowWeek3) {
+              return week.week !== "3"
+            }
+            return true
+          })
+          .map((week: any) => {
+            return (
+              <HeroDetailsRow key={week.week} shadows={shadows}>
+                <CampName>
+                  {campName} {week.week}:
+                </CampName>
+                <CampDate>{week.shortDates}</CampDate>
+              </HeroDetailsRow>
+            )
+          })}
       </div>
       {ENABLE_BOOKING && (
         <>

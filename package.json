@@ -35,11 +35,11 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "gatsby build && netlify-lambda build functions --config webpack.functions.js",
+    "build": "gatsby build",
     "develop": "gatsby develop",
     "format": "prettier --write \"{src,functions}/**/*.{js,ts,tsx}\"",
     "prettier-check": "prettier -l \"{src,functions}/**/*.{js,ts,tsx}\"",
-    "functions": "netlify-lambda serve functions",
+    "functions": "netlify functions:serve",
     "test": "echo \"Error: no test specified\" && exit 1",
     "types": "tsc -p . --noEmit",
     "eslint": "eslint \"{src,functions}/**/*.{ts,js,tsx}\"",
@@ -47,8 +47,10 @@
     "postinstall": "./postinstall.sh"
   },
   "devDependencies": {
+    "@aws-sdk/client-ses": "^3.940.0",
     "@babel/plugin-proposal-optional-chaining": "^7.18.9",
     "@babel/plugin-transform-object-assign": "^7.18.6",
+    "@netlify/functions": "^5.1.0",
     "@types/aws-lambda": "^8.10.102",
     "@types/node": "^18.7.3",
     "@types/node-fetch": "^2.6.2",
@@ -57,6 +59,7 @@
     "@types/react-helmet": "^6.1.5",
     "@types/styled-components": "^5.1.26",
     "@typescript-eslint/parser": "^5.33.0",
+    "aws-sdk": "^2.1692.0",
     "babel-plugin-styled-components": "^2.0.7",
     "deepmerge": "^4.2.2",
     "dotenv": "^16.0.1",
@@ -66,7 +69,7 @@
     "gatsby-plugin-styled-components": "^5.20.0",
     "gatsby-plugin-typescript": "^4.20.0",
     "gatsby-remark-copy-linked-files": "^5.20.0",
-    "netlify-lambda": "bdrobinson/netlify-lambda#07dbb3b",
+    "netlify-cli": "^23.12.2",
     "prettier": "^2.7.1",
     "typescript": "4.7.4"
   },
