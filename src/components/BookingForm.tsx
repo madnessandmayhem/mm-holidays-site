@@ -1122,17 +1122,3 @@ const Subsection = ({
 const SmallText = styled.p`
   font-size: 0.8em;
 `
-
-const calculateCamp = (values: FormState): string | null => {
-  const dob = newDate(
-    values.childDobYear,
-    values.childDobMonth,
-    values.childDobDay,
-  )
-  const schoolYear = dob != null ? getSchoolYear(dob, 2026) : null
-  const inferredCamp =
-    schoolYear != null
-      ? getCampFromSchoolYearAndWeek(values.campChoice, schoolYear)
-      : null
-  return inferredCamp
-}
