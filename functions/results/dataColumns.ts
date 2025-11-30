@@ -237,11 +237,6 @@ export const createColumns = (params: Params): Array<Column> => {
       value: params.heardOther,
     },
     {
-      id: "paymentMethod",
-      name: "Payment method",
-      value: params.paymentMethod ?? "",
-    },
-    {
       id: "paymentAmount",
       name: "Payment amount",
       value: params.paymentAmount ?? "",

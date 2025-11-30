@@ -17,10 +17,7 @@ const CamperEmail: FC<CamperEmailProps> = ({
   const price = week === "3" ? 299 : 320
   return (
     <body>
-      <p>
-        We&apos;re delighted you have applied to come to M+M Week 2026. (week{" "}
-        {week}).
-      </p>
+      <p>We&apos;re delighted you have applied to come to M+M 2026.</p>
       <p>Key details:</p>
       <ul>
         <li>Camper name: {camperFullName}</li>
