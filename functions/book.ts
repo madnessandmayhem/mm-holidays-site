@@ -112,7 +112,6 @@ export const handleLogic = async (
     awsSecretAccessKey: getEnv("MM_AWS_SECRET_ACCESS_KEY"),
   })
 
-  const CONFIRMATION_EMAIL_RECIPIENT = getEnv("CONFIRMATION_EMAIL_RECIPIENT")
   const GOOGLE_SPREADSHEET_ID = getEnv("GOOGLE_SPREADSHEET_ID")
   const GOOGLE_CLIENT_EMAIL = getEnv("GOOGLE_CLIENT_EMAIL")
   const GOOGLE_PRIVATE_KEY = JSON.parse(getEnv("GOOGLE_PRIVATE_KEY"))
@@ -236,7 +235,10 @@ export const handleLogic = async (
     const html = renderCampLeaderEmail(columns)
     await emailClient.sendEmail({
       subject: `(${camperFullName}) New submission from booking form`,
-      toAddresses: CONFIRMATION_EMAIL_RECIPIENT.split(","),
+      toAddresses: [
+        "bookings@madnessandmayhem.org.uk",
+        `week${params.campChoice}@madnessandmayhem.org.uk`,
+      ],
       html,
     })
   } catch (err) {
@@ -267,14 +269,6 @@ const getSheetsClient = async (
   return google.sheets({ version: "v4", auth: jwtClient })
 }
 
-//  to: {
-//         name: `${params.parentFirstName} ${params.parentLastName}`,
-//         email: confirmationEmailAddress,
-//       },
-//       from: { name: "M+M Bookings", email: "bookings@madnessandmayhem.org.uk" },
-//       subject: "Thank you for applying for a place at M+M 2026",
-//       text: html,
-//       html,
 type SendEmailArgs = {
   toAddresses: Array<string>
   subject: string
