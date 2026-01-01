@@ -7,7 +7,7 @@ heroAltText: Campers canoeing down the river.
 theme: "light"
 ---
 
-We are delighted to announce that this year, M+M will be running a third week.
+We are delighted to announce that from 2026, M+M will be running a third week.
 
 Week 3 will have everything you know and love about Weeks 1+2, but will be different to Weeks 1+2 in a couple of ways for 2026.
 
