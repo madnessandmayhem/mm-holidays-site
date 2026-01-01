@@ -1,4 +1,4 @@
 ---
-header: "Week 3 bookings are now open!"
+header: "Bookings are now open!"
 ---
-You can now book on to [Week 3](/week3)! Bookings for Weeks 1+2 will open on 2nd January 2026.
+You can now book on to all 3 weeks of M+M 2026!

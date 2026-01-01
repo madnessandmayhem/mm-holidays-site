@@ -119,7 +119,7 @@ const MUST_BE_TRUE: Array<keyof FormState> = [
 
 const getInitialState = (): FormState => ({
   // section 1
-  campChoice: "3",
+  campChoice: "1",
   week1Backup: false,
   week2Backup: false,
   week3Backup: false,
@@ -584,13 +584,13 @@ const BookingForm: FC<Props> = ({ onComplete, initialState }: Props) => {
                     value: "1",
                     label: "Week 1 (£320)",
                     subtitle: "Sat 25th July – Sat 1st August 2026",
-                    disabled: true,
+                    disabled: false,
                   },
                   {
                     value: "2",
                     label: "Week 2 (£320)",
                     subtitle: "Sat 1st – Sat 8th August 2026",
-                    disabled: true,
+                    disabled: false,
                   },
                   {
                     value: "3",
@@ -600,9 +600,6 @@ const BookingForm: FC<Props> = ({ onComplete, initialState }: Props) => {
                   },
                 ]}
               />
-              <SmallText>
-                Booking will open for Weeks 1 and 2 on 2nd January 2026.
-              </SmallText>
               <h3>Alternative weeks</h3>
               <SmallText>
                 If we run out of space on Week {values.campChoice}, would you be
