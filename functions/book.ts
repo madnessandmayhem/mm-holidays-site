@@ -148,13 +148,6 @@ export const handleLogic = async (
     }
   }
 
-  if (params.campChoice !== "3") {
-    return {
-      statusCode: 400,
-      body: "Only Week 3 is currently available",
-    }
-  }
-
   const confirmationEmailAddress =
     params.parentEmail !== ""
       ? params.parentEmail
