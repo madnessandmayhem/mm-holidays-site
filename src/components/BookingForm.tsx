@@ -452,10 +452,12 @@ const getSchoolYear = (dob: Date, yearOfCamp: number): number => {
   return schoolYear
 }
 
+type CampType = "Max" | "Madness" | "Madness+" | "Mayhem" | "Ineligible"
+
 const getCampFromSchoolYearAndWeek = (
   week: "1" | "2" | "3",
   schoolYear: number,
-): string | null => {
+): CampType | null => {
   if (week === "3") {
     if (schoolYear >= 4 && schoolYear <= 6) {
       return "Max"
@@ -475,6 +477,19 @@ const getCampFromSchoolYearAndWeek = (
   } else {
     return null
   }
+}
+
+const getPrice = (
+  week: "1" | "2" | "3",
+  camp: CampType | null,
+  gender: "Male" | "Female",
+): number => {
+  if (camp === null) {
+    return 320
+  }
+  if (week === "3") return 299
+  if (camp === "Mayhem" && gender === "Male") return 255
+  return 320
 }
 
 type SubmitState =
@@ -558,7 +573,7 @@ const BookingForm: FC<Props> = ({ onComplete, initialState }: Props) => {
         )
         const hideParentSection = age !== null && age >= 18
         const displayParentSection = !hideParentSection
-        const price = values.campChoice === "3" ? "299" : "320"
+        const price = getPrice(values.campChoice, inferredCamp, values.gender)
         return (
           <form
             style={{ marginBottom: "1em" }}
@@ -582,19 +597,19 @@ const BookingForm: FC<Props> = ({ onComplete, initialState }: Props) => {
                 options={[
                   {
                     value: "1",
-                    label: "Week 1 (£320)",
+                    label: "Week 1",
                     subtitle: "Sat 25th July – Sat 1st August 2026",
                     disabled: false,
                   },
                   {
                     value: "2",
-                    label: "Week 2 (£320)",
+                    label: "Week 2",
                     subtitle: "Sat 1st – Sat 8th August 2026",
                     disabled: false,
                   },
                   {
                     value: "3",
-                    label: "Week 3 (£299)",
+                    label: "Week 3",
                     subtitle: "Sat 8th – Sat 15th August 2026",
                     disabled: false,
                   },
