@@ -13,3 +13,5 @@ Fill out this form to book your place on M+M. You can read our Terms and Conditi
 > Full details can be found [here](/week3).
 
 <br />
+
+### Pricing overview
