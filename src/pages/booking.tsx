@@ -1,5 +1,6 @@
 import React, { FC, useLayoutEffect, useState } from "react"
-import { graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
+import styled from "styled-components"
 
 import BookingForm, { FormState } from "../components/BookingForm"
 import Layout from "../components/Layout"
@@ -9,6 +10,29 @@ import { ENABLE_BOOKING, MOBILE_WIDTH } from "../constants"
 import HeadTags from "../components/HeadTags"
 import { getImage } from "gatsby-plugin-image"
 import RemarkText from "../components/RemarkText"
+
+const PricingTable = styled.table`
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1em;
+
+  th,
+  td {
+    border: 1px solid #ddd;
+    padding: 0.75em;
+    text-align: center;
+  }
+
+  th {
+    background-color: #f5f5f5;
+    font-weight: 600;
+  }
+
+  td:first-child {
+    font-weight: 600;
+    text-align: left;
+  }
+`
 
 interface Props {
   data: any
@@ -85,6 +109,41 @@ const Booking: FC<Props> = ({ data }: Props) => {
           `}
         >
           <RemarkText innerHTML={data.markdownRemark.html} />
+          <PricingTable>
+            <thead>
+              <tr>
+                <th></th>
+                <th>Max (9-11)</th>
+                <th>Madness (12-14)</th>
+                <th>Mayhem (15-18)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Week 1</td>
+                <td>£320</td>
+                <td>£320</td>
+                <td>£320 (girls) / £255* (boys)</td>
+              </tr>
+              <tr>
+                <td>Week 2</td>
+                <td>£320</td>
+                <td>£320</td>
+                <td>£320 (girls) / £255* (boys)</td>
+              </tr>
+              <tr>
+                <td>Week 3</td>
+                <td>£299</td>
+                <td colSpan={2}>£299 (Madness+, 12-16)</td>
+              </tr>
+            </tbody>
+          </PricingTable>
+          <p css="font-size: 1em; margin-bottom: 2em;">
+            *On Weeks 1+2, Mayhem boys will be accommodated in bell tents. To
+            reflect that the boys will be camping, the price is reduced to £255
+            for Mayhem boys. Full details can be found{" "}
+            <Link to="/mayhem">here</Link>.
+          </p>
           <BookingForm
             onComplete={formState => {
               setPreviousState(formState)

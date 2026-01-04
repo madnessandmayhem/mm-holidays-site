@@ -287,6 +287,20 @@ const validateForm = (formState: FormState): FormikErrors<FormState> => {
     errors.childDobYear = "Invalid year"
   }
 
+  // Check if the child is eligible for the selected week
+  const dob = newDate(
+    formState.childDobYear,
+    formState.childDobMonth,
+    formState.childDobDay,
+  )
+  if (dob !== null) {
+    const schoolYear = getSchoolYear(dob, 2026)
+    const camp = getCampFromSchoolYearAndWeek(formState.campChoice, schoolYear)
+    if (camp === "Ineligible") {
+      errors.childDobYear = `Unfortunately, Week ${formState.campChoice} cannot accommodate young people of this age. Please choose a different week, or contact us.`
+    }
+  }
+
   return errors
 }
 
@@ -452,17 +466,19 @@ const getSchoolYear = (dob: Date, yearOfCamp: number): number => {
   return schoolYear
 }
 
+type CampType = "Max" | "Madness" | "Madness+" | "Mayhem" | "Ineligible"
+
 const getCampFromSchoolYearAndWeek = (
   week: "1" | "2" | "3",
   schoolYear: number,
-): string | null => {
+): CampType => {
   if (week === "3") {
     if (schoolYear >= 4 && schoolYear <= 6) {
       return "Max"
     } else if (schoolYear >= 7 && schoolYear <= 11) {
       return "Madness+"
     } else {
-      return null
+      return "Ineligible"
     }
   }
 
@@ -473,8 +489,21 @@ const getCampFromSchoolYearAndWeek = (
   } else if (schoolYear >= 10 && schoolYear <= 13) {
     return "Mayhem"
   } else {
-    return null
+    return "Ineligible"
   }
+}
+
+const getPrice = (
+  week: "1" | "2" | "3",
+  camp: CampType | null,
+  gender: "Male" | "Female",
+): number => {
+  if (camp === null || camp === "Ineligible") {
+    return 320
+  }
+  if (week === "3") return 299
+  if (camp === "Mayhem" && gender === "Male") return 255
+  return 320
 }
 
 type SubmitState =
@@ -558,7 +587,7 @@ const BookingForm: FC<Props> = ({ onComplete, initialState }: Props) => {
         )
         const hideParentSection = age !== null && age >= 18
         const displayParentSection = !hideParentSection
-        const price = values.campChoice === "3" ? "299" : "320"
+        const price = getPrice(values.campChoice, inferredCamp, values.gender)
         return (
           <form
             style={{ marginBottom: "1em" }}
@@ -582,19 +611,19 @@ const BookingForm: FC<Props> = ({ onComplete, initialState }: Props) => {
                 options={[
                   {
                     value: "1",
-                    label: "Week 1 (£320)",
+                    label: "Week 1",
                     subtitle: "Sat 25th July – Sat 1st August 2026",
                     disabled: false,
                   },
                   {
                     value: "2",
-                    label: "Week 2 (£320)",
+                    label: "Week 2",
                     subtitle: "Sat 1st – Sat 8th August 2026",
                     disabled: false,
                   },
                   {
                     value: "3",
-                    label: "Week 3 (£299)",
+                    label: "Week 3",
                     subtitle: "Sat 8th – Sat 15th August 2026",
                     disabled: false,
                   },
@@ -652,7 +681,7 @@ const BookingForm: FC<Props> = ({ onComplete, initialState }: Props) => {
                 type="tel"
               />
               <TextField label="Contact email" name="childEmail" type="email" />
-              <div>
+              <div css="margin-bottom: 0.5em">
                 <label htmlFor="childDobDay">
                   <FieldTitle>Date of birth</FieldTitle>
                 </label>
@@ -679,14 +708,16 @@ const BookingForm: FC<Props> = ({ onComplete, initialState }: Props) => {
               <FieldErrorMessage name="childDobDay" />
               <FieldErrorMessage name="childDobMonth" />
               <FieldErrorMessage name="childDobYear" />
-              {schoolYear != null && inferredCamp != null && (
-                <p>
-                  This means your child is in <strong>year {schoolYear}</strong>{" "}
-                  at school and so would be in the{" "}
-                  <strong>{inferredCamp}</strong> age group at M+M. Please
-                  contact us if that is incorrect.
-                </p>
-              )}
+              {schoolYear != null &&
+                inferredCamp != null &&
+                inferredCamp !== "Ineligible" && (
+                  <p>
+                    This means your child is in{" "}
+                    <strong>year {schoolYear}</strong> at school and so would be
+                    in the <strong>{inferredCamp}</strong> age group at M+M.
+                    Please contact us if that is incorrect.
+                  </p>
+                )}
               <RadioChoices
                 title="Sex"
                 fieldName="gender"

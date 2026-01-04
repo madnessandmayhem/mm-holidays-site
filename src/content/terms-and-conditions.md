@@ -18,7 +18,7 @@ The bank details are:
 You will not receive a reminder of the balance due. If payment is not received by this date, we reserve the right to advise you of cancellation of your booking and the loss of your deposit. If you book within eight weeks of the start of the holiday, full fees are due with the application. Holiday places are limited so please book early. M+M Holidays reserves the right to refuse any application.
 
 ## 2. What is included in the cost of the holiday?
-The price includes full board and accommodation, one Frontier Centre-led activity, equipment and any excursions. The holiday is based at The Frontier Centre, Northamptonshire. Accommodation arrangements are in single sex bedrooms, generally sleeping between two and eight young people. In an effort to keep the cost of the holiday as affordable as possible, most volunteer team members also donate the same amount as the cost of a place for a camper. 
+The price includes full board and accommodation, one Frontier Centre-led activity, equipment and any excursions. The holiday is based at The Frontier Centre, Northamptonshire. Accommodation arrangements are in single sex bedrooms (or bell tents for Mayhem boys), generally sleeping between two and eight young people. In an effort to keep the cost of the holiday as affordable as possible, most volunteer team members also donate the same amount as the cost of a place for a camper. 
 
 ## 3. What about travel?
 The cost of travel to and from the holiday is not included in the fee. Parents and carers are responsible for the travel arrangements to and from the holiday. 
