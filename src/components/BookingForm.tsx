@@ -287,6 +287,20 @@ const validateForm = (formState: FormState): FormikErrors<FormState> => {
     errors.childDobYear = "Invalid year"
   }
 
+  // Check if the child is eligible for the selected week
+  const dob = newDate(
+    formState.childDobYear,
+    formState.childDobMonth,
+    formState.childDobDay,
+  )
+  if (dob !== null) {
+    const schoolYear = getSchoolYear(dob, 2026)
+    const camp = getCampFromSchoolYearAndWeek(formState.campChoice, schoolYear)
+    if (camp === "Ineligible") {
+      errors.childDobYear = `Unfortunately, Week ${formState.campChoice} cannot accommodate young people of this age. Please choose a different week, or contact us.`
+    }
+  }
+
   return errors
 }
 
@@ -457,14 +471,14 @@ type CampType = "Max" | "Madness" | "Madness+" | "Mayhem" | "Ineligible"
 const getCampFromSchoolYearAndWeek = (
   week: "1" | "2" | "3",
   schoolYear: number,
-): CampType | null => {
+): CampType => {
   if (week === "3") {
     if (schoolYear >= 4 && schoolYear <= 6) {
       return "Max"
     } else if (schoolYear >= 7 && schoolYear <= 11) {
       return "Madness+"
     } else {
-      return null
+      return "Ineligible"
     }
   }
 
@@ -475,7 +489,7 @@ const getCampFromSchoolYearAndWeek = (
   } else if (schoolYear >= 10 && schoolYear <= 13) {
     return "Mayhem"
   } else {
-    return null
+    return "Ineligible"
   }
 }
 
@@ -484,7 +498,7 @@ const getPrice = (
   camp: CampType | null,
   gender: "Male" | "Female",
 ): number => {
-  if (camp === null) {
+  if (camp === null || camp === "Ineligible") {
     return 320
   }
   if (week === "3") return 299
@@ -667,7 +681,7 @@ const BookingForm: FC<Props> = ({ onComplete, initialState }: Props) => {
                 type="tel"
               />
               <TextField label="Contact email" name="childEmail" type="email" />
-              <div>
+              <div css="margin-bottom: 0.5em">
                 <label htmlFor="childDobDay">
                   <FieldTitle>Date of birth</FieldTitle>
                 </label>
@@ -694,14 +708,16 @@ const BookingForm: FC<Props> = ({ onComplete, initialState }: Props) => {
               <FieldErrorMessage name="childDobDay" />
               <FieldErrorMessage name="childDobMonth" />
               <FieldErrorMessage name="childDobYear" />
-              {schoolYear != null && inferredCamp != null && (
-                <p>
-                  This means your child is in <strong>year {schoolYear}</strong>{" "}
-                  at school and so would be in the{" "}
-                  <strong>{inferredCamp}</strong> age group at M+M. Please
-                  contact us if that is incorrect.
-                </p>
-              )}
+              {schoolYear != null &&
+                inferredCamp != null &&
+                inferredCamp !== "Ineligible" && (
+                  <p>
+                    This means your child is in{" "}
+                    <strong>year {schoolYear}</strong> at school and so would be
+                    in the <strong>{inferredCamp}</strong> age group at M+M.
+                    Please contact us if that is incorrect.
+                  </p>
+                )}
               <RadioChoices
                 title="Sex"
                 fieldName="gender"
