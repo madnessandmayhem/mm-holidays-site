@@ -2,61 +2,17 @@ import React, { FC } from "react"
 import { renderToStaticMarkup } from "react-dom/server"
 
 import { Column } from "./dataColumns"
+import {
+  getSchoolYear,
+  getCampFromSchoolYearAndWeek,
+  getPrice,
+} from "../../src/utils/pricing"
 
 interface CamperEmailProps {
   week: "1" | "2" | "3"
   camperFullName: string
   camperDob: string
   gender: "Male" | "Female"
-}
-
-type CampType = "Max" | "Madness" | "Madness+" | "Mayhem" | "Ineligible"
-
-const getSchoolYear = (dob: Date, yearOfCamp: number): number => {
-  let birthYear = dob.getFullYear()
-  if (dob.getMonth() < 8) {
-    birthYear -= 1
-  }
-  const schoolYear = yearOfCamp - birthYear - 6
-  return schoolYear
-}
-
-const getCampFromSchoolYearAndWeek = (
-  week: "1" | "2" | "3",
-  schoolYear: number,
-): CampType => {
-  if (week === "3") {
-    if (schoolYear >= 4 && schoolYear <= 6) {
-      return "Max"
-    } else if (schoolYear >= 7 && schoolYear <= 11) {
-      return "Madness+"
-    } else {
-      return "Ineligible"
-    }
-  }
-
-  if (schoolYear >= 4 && schoolYear <= 6) {
-    return "Max"
-  } else if (schoolYear >= 7 && schoolYear <= 9) {
-    return "Madness"
-  } else if (schoolYear >= 10 && schoolYear <= 13) {
-    return "Mayhem"
-  } else {
-    return "Ineligible"
-  }
-}
-
-const getPrice = (
-  week: "1" | "2" | "3",
-  camp: CampType | null,
-  gender: "Male" | "Female",
-): number => {
-  if (camp === null || camp === "Ineligible") {
-    return 320
-  }
-  if (week === "3") return 299
-  if (camp === "Mayhem" && gender === "Male") return 255
-  return 320
 }
 
 const CamperEmail: FC<CamperEmailProps> = ({
