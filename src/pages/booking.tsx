@@ -129,7 +129,11 @@ const Booking: FC<Props> = ({ data }: Props) => {
                 <td>Week 2</td>
                 <td>£320</td>
                 <td>£320</td>
-                <td>£320 (girls) / £255* (boys)</td>
+                <td css="background-color: #eee">
+                  £320 (girls) / £255* (boys)
+                  <br />
+                  <i>(Waiting list due to limited space)</i>
+                </td>
               </tr>
               <tr>
                 <td>Week 3</td>
@@ -138,10 +142,6 @@ const Booking: FC<Props> = ({ data }: Props) => {
               </tr>
             </tbody>
           </PricingTable>
-          <p>
-            Week 2 Mayhem is currently operating a waiting list due to limited
-            space.
-          </p>
           <p css="font-size: 1em; margin-bottom: 2em;">
             *On Weeks 1+2, Mayhem boys will be accommodated in bell tents. To
             reflect that the boys will be camping, the price is reduced to £255
