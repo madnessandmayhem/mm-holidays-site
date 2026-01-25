@@ -138,6 +138,10 @@ const Booking: FC<Props> = ({ data }: Props) => {
               </tr>
             </tbody>
           </PricingTable>
+          <p>
+            Week 2 Mayhem is currently operating a waiting list due to limited
+            space.
+          </p>
           <p css="font-size: 1em; margin-bottom: 2em;">
             *On Weeks 1+2, Mayhem boys will be accommodated in bell tents. To
             reflect that the boys will be camping, the price is reduced to £255
