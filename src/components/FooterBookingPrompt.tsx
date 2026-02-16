@@ -121,21 +121,30 @@ const FooterBookingPrompt: FC<Props> = () => {
             >
               <BookButton fontSize="1.3em">Book now</BookButton>
             </div>
-            <p
+            <div
               css={`
                 grid-area: subtitle;
                 margin: 0;
-                font-size: 1.4em;
+                font-size: 1.2em;
                 & a {
                   color: currentColor;
                 }
               `}
             >
-              Got questions? You can read more about <Link to="/max/">Max</Link>
-              , <Link to="/madness/">Madness</Link> and{" "}
-              <Link to="/mayhem/">Mayhem</Link>, or{" "}
-              <Link to="/contact/">get in touch</Link> with us.
-            </p>
+              <p css="margin: 0 0 0.4em 0;">
+                Places still available on Week 3. Week 1 &amp; 2 have limited
+                spaces &mdash; please{" "}
+                <a href="mailto:bookings@madnessandmayhem.org.uk">enquire</a>{" "}
+                before booking.
+              </p>
+              <p css="margin: 0; font-size: 0.85em; opacity: 0.85;">
+                Got questions? Read more about{" "}
+                <Link to="/max/">Max</Link>,{" "}
+                <Link to="/madness/">Madness</Link> and{" "}
+                <Link to="/mayhem/">Mayhem</Link>, or{" "}
+                <Link to="/contact/">get in touch</Link>.
+              </p>
+            </div>
           </div>
         </PageGutter>
       </div>

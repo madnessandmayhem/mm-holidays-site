@@ -1,7 +1,7 @@
 import styled from "styled-components"
 import React, { FC } from "react"
 
-import { TINY_WIDTH, ENABLE_BOOKING } from "../constants"
+import { TINY_WIDTH, ENABLE_BOOKING, GREEN, RED } from "../constants"
 import BookButton from "./BookButton"
 import { graphql, useStaticQuery } from "gatsby"
 
@@ -106,6 +106,35 @@ const HeroBookingPrompt: FC<Props> = () => {
         </BookingNoticeText>
         {ENABLE_BOOKING && <BookButton>Book now</BookButton>}
       </Content>
+      {ENABLE_BOOKING && (
+        <div
+          css={`
+            font-size: 0.85em;
+            line-height: 1.5;
+            margin-top: 1em;
+          `}
+        >
+          <p
+            css={`
+              margin: 0 0 0.3em 0;
+              color: ${GREEN};
+              font-weight: 600;
+            `}
+          >
+            Places still available on Week 3 &mdash; book now!
+          </p>
+          <p
+            css={`
+              margin: 0;
+              color: ${RED};
+              font-weight: 600;
+            `}
+          >
+            Week 1 &amp; 2 have limited spaces &mdash; please enquire before
+            booking.
+          </p>
+        </div>
+      )}
     </Main>
   )
 }

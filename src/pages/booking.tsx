@@ -6,7 +6,7 @@ import BookingForm, { FormState } from "../components/BookingForm"
 import Layout from "../components/Layout"
 import HeroImage from "../components/HeroImage"
 import Button from "../components/Button"
-import { ENABLE_BOOKING, MOBILE_WIDTH } from "../constants"
+import { ENABLE_BOOKING, MOBILE_WIDTH, GREEN, RED } from "../constants"
 import HeadTags from "../components/HeadTags"
 import { getImage } from "gatsby-plugin-image"
 import RemarkText from "../components/RemarkText"
@@ -109,6 +109,39 @@ const Booking: FC<Props> = ({ data }: Props) => {
           `}
         >
           <RemarkText innerHTML={data.markdownRemark.html} />
+          <div
+            css={`
+              width: 100%;
+              margin-bottom: 1.5em;
+              font-size: 1em;
+              line-height: 1.6;
+            `}
+          >
+            <p
+              css={`
+                background-color: ${GREEN}22;
+                border-left: 4px solid ${GREEN};
+                padding: 0.75em 1em;
+                margin: 0 0 0.5em 0;
+              `}
+            >
+              <strong>Places still available on Week 3.</strong> Book now to
+              avoid disappointment.
+            </p>
+            <p
+              css={`
+                background-color: ${RED}22;
+                border-left: 4px solid ${RED};
+                padding: 0.75em 1em;
+                margin: 0;
+              `}
+            >
+              <strong>Week 1 and Week 2 have limited spaces.</strong> Please
+              enquire via{" "}
+              <a href="mailto:bookings@madnessandmayhem.org.uk">email</a> before
+              booking.
+            </p>
+          </div>
           <PricingTable>
             <thead>
               <tr>
