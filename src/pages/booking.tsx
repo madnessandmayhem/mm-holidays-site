@@ -129,9 +129,7 @@ const Booking: FC<Props> = ({ data }: Props) => {
                 <td>Week 2</td>
                 <td>£320</td>
                 <td>£320</td>
-                <td>
-                  £320 (girls) / £255* (boys)
-                </td>
+                <td>£320 (girls) / £255* (boys)</td>
               </tr>
               <tr>
                 <td>Week 3</td>
