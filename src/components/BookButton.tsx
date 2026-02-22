@@ -28,7 +28,10 @@ const BookingNoticeLink: ComponentType<Props> = styled(Link).attrs({
   color: ${PRIMARY_COLOUR_DARK};
   text-decoration: none;
   font-weight: bold;
-  transition: background-color 400ms, color 400ms, box-shadow 200ms;
+  transition:
+    background-color 400ms,
+    color 400ms,
+    box-shadow 200ms;
   font-size: ${({ fontSize = "1.2em" }: Props) => fontSize};
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   border-radius: 0.5em;

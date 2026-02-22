@@ -28,15 +28,13 @@ const links: Array<{ name: string; path: string }> = [
 interface Props {}
 
 const Footer: FC<Props> = () => {
-  const data = useStaticQuery(
-    graphql`
-      query Footer {
-        site {
-          buildTime
-        }
+  const data = useStaticQuery(graphql`
+    query Footer {
+      site {
+        buildTime
       }
-    `,
-  )
+    }
+  `)
   return (
     <footer
       css={`

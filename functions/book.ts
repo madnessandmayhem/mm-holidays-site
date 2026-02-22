@@ -152,8 +152,8 @@ export const handleLogic = async (
     params.parentEmail !== ""
       ? params.parentEmail
       : params.childEmail !== ""
-      ? params.childEmail
-      : null
+        ? params.childEmail
+        : null
   // tslint:disable-next-line strict-type-predicates
   if (confirmationEmailAddress == null) {
     return { statusCode: 400, body: "Please provide an email" }
