@@ -1,4 +1,4 @@
 ---
-header: "Bookings are now open!"
+header: "Places are still available on Week 3!"
 ---
-You can now book on to all 3 weeks of M+M 2026! Weeks 1+2 are operating a wait list.
+Weeks 1 and 2 are operating a waiting list.
