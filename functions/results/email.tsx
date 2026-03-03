@@ -2,19 +2,30 @@ import React, { FC } from "react"
 import { renderToStaticMarkup } from "react-dom/server"
 
 import { Column } from "./dataColumns"
+import {
+  getSchoolYear,
+  getCampFromSchoolYearAndWeek,
+  getPrice,
+} from "../../src/utils/pricing"
 
 interface CamperEmailProps {
   week: "1" | "2" | "3"
   camperFullName: string
   camperDob: string
+  gender: "Male" | "Female"
 }
 
 const CamperEmail: FC<CamperEmailProps> = ({
   week,
   camperFullName,
   camperDob,
+  gender,
 }) => {
-  const price = week === "3" ? 299 : 320
+  const [year, month, day] = camperDob.split("-").map(Number)
+  const dob = new Date(year, month - 1, day)
+  const schoolYear = getSchoolYear(dob, 2026)
+  const camp = getCampFromSchoolYearAndWeek(week, schoolYear)
+  const price = getPrice(week, camp, gender)
   return (
     <body>
       <p>We&apos;re delighted you have applied to come to M+M 2026.</p>

@@ -209,6 +209,7 @@ export const handleLogic = async (
       week: params.campChoice,
       camperFullName,
       camperDob: `${params.childDobYear}-${params.childDobMonth}-${params.childDobDay}`,
+      gender: params.gender,
     })
     await emailClient.sendEmail({
       subject: "Thank you for applying for a place at M+M 2026",
