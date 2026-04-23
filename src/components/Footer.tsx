@@ -63,25 +63,52 @@ const Footer: FC<Props> = () => {
             align-items: center;
           `}
         >
-          <Link
-            to="/"
+          <div
             css={`
               grid-area: logo;
-              display: block;
-              width: 6em;
-              height: auto;
-              opacity: 0.6;
+              display: flex;
+              flex-direction: column;
+              align-items: flex-start;
+              gap: 0.75em;
             `}
           >
-            <StaticImage
-              src="../images/logo_black.png"
-              alt="The M+M logo"
-              placeholder="tracedSVG"
-            />
-          </Link>
+            <Link
+              to="/"
+              css={`
+                display: block;
+                width: 6em;
+                height: auto;
+                opacity: 0.6;
+              `}
+            >
+              <StaticImage
+                src="../images/logo_black.png"
+                alt="The M+M logo"
+                placeholder="tracedSVG"
+              />
+            </Link>
+            <a
+              href="https://www.crnet.org.uk"
+              target="_blank"
+              rel="noopener noreferrer"
+              css={`
+                display: block;
+                width: 6em;
+                height: auto;
+                opacity: 0.6;
+              `}
+            >
+              <StaticImage
+                src="../images/cci_logo.png"
+                alt="Christian Residential Network logo"
+                placeholder="tracedSVG"
+              />
+            </a>
+          </div>
           <div
             css={`
               grid-area: email;
+              align-self: start;
             `}
           >
             <p
