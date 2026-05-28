@@ -1,4 +1,4 @@
 ---
-header: "Places are still available on Week 3!"
+header: "Places are still available on Week 3 and Madness (12-14s) on Week 2!"
 ---
-Weeks 1 and 2 are operating a waiting list.
+Week 1 and Week 2 (except 12-14s) are operating a waiting list.
