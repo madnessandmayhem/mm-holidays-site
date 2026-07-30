@@ -37,7 +37,7 @@ For more information, please do [get in touch](/contact).
 
 Mayhem boys will be accommodated in bell tents. It's an opportunity to enjoy the great outdoors in a cosy tented village.
 
-You'll be in tents of 6 or 4. The tents are made of a sturdy waterproof canvas with an integral ground sheet. You'll sleep on a camp bed along with a self inflating mattress. Bedding will also be provided. Showers and toilets are a short walk to the nearby block.
+You'll be in tents of 6 or 4. The tents are made of a sturdy waterproof canvas with an integral ground sheet. You'll sleep on a camp bed along with a self inflating mattress (please bring your sleeping bag!). Showers and toilets are a short walk to the nearby block.
 
 Regrettably, this accommodation is not suitable for those with mobility issues but if that would be you, please do get in touch to discuss possible alternatives.
 
