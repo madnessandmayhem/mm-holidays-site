@@ -19,7 +19,7 @@ export const GREY_TEXT = "#777"
 export const HERO_IMAGE_MAX_HEIGHT = 800
 export const HERO_IMAGE_MIN_HEIGHT = TINY_WIDTH
 
-export const ENABLE_BOOKING: boolean = true
+export const ENABLE_BOOKING: boolean = false
 
 export const Z_INDICES = {
   nav: 5,
