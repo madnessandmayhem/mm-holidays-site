@@ -1,4 +1,4 @@
 ---
-header: "Places are still available on Week 3 and Madness (12-14s) on Week 2!"
+header: "Save the dates for 2027!"
 ---
-Week 1 and Week 2 (except 12-14s) are operating a waiting list.
+Put the dates for M+M 2027 into your diary and we'll see you there! Bookings will open in the new year.
